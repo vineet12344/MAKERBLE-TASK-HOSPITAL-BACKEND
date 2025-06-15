@@ -21,13 +21,15 @@ func ConnectDB() {
 	)
 
 	var err error
+	var dbName string
 
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
+		err = DB.Raw("SELECT current_database()").Scan(&dbName).Error
+
 		log.Fatal("Error connecting to Database", err)
 	}
 
-	var dbName string
 
 	err = DB.Raw("SELECT current_database()").Scan(&dbName).Error
 

@@ -16,6 +16,7 @@ import (
 
 func init() {
 	initializers.LoadEnv()
+	fmt.Println("Connecting to DB:", os.Getenv("DB_HOST"), os.Getenv("DB_NAME"))
 	initializers.ConnectDB()
 	initializers.SyncDB()
 	gin.SetMode(gin.ReleaseMode)
