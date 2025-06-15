@@ -97,6 +97,3 @@ Authorization: Bearer <token>
 
 ---
 
-✅ You can import these into Thunder Client or copy each one manually.
-
-Would you like me to also generate a JSON Thunder Collection export for direct import into VS Code Thunder Client?
