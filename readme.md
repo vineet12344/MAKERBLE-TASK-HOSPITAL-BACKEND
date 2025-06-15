@@ -157,9 +157,6 @@ PORT=8080
 ## 👤 Author
 
 **Vineet Salve**  
-Backend Development Intern — Makerble  
-Pimpri Chinchwad College of Engineering, Pune
-
 ---
 
 ## 📎 License
