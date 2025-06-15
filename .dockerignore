@@ -1,0 +1,8 @@
+.git
+.gitignore
+.env
+Dockerfile
+docs/swagger.yaml
+docs/swagger.json
+bin/
+*.log
