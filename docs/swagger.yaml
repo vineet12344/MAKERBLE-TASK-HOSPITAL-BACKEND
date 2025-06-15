@@ -1,0 +1,9 @@
+basePath: /api
+host: localhost:8080
+info:
+  contact: {}
+  description: Role-based backend for doctors and receptionists
+  title: Hospital Management Backend API
+  version: "1.0"
+paths: {}
+swagger: "2.0"
