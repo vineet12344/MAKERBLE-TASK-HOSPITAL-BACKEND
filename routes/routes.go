@@ -3,11 +3,18 @@ package routes
 import (
 	"hospital-backend/controllers"
 	"hospital-backend/middleware"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
 func RegisterRoutes(router *gin.Engine) {
+
+	router.GET("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"Message": "HELLO SERVER RUNNING",
+		})
+	})
 	api := router.Group("/api")
 
 	api.POST("/signup", controllers.Signup)
