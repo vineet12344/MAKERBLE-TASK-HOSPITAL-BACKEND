@@ -12,7 +12,7 @@ import (
 var DB *gorm.DB
 
 func ConnectDB() {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Kolkata",
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=require TimeZone=Asia/Kolkata",
 		os.Getenv("DB_HOST"),
 		os.Getenv("DB_USER"),
 		os.Getenv("DB_PASSWORD"),
@@ -29,7 +29,6 @@ func ConnectDB() {
 
 		log.Fatal("Error connecting to Database", err)
 	}
-
 
 	err = DB.Raw("SELECT current_database()").Scan(&dbName).Error
 
