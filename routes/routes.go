@@ -12,7 +12,7 @@ func RegisterRoutes(router *gin.Engine) {
 
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"Message": "HELLO SERVER RUNNING",
+			"Message": "HELLO SERVER RUNNING. Please use this link to test API: https://makerble-task-hospital-backend.onrender.com/swagger/index.html",
 		})
 	})
 	api := router.Group("/api")

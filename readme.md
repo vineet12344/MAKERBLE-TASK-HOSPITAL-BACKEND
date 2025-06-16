@@ -4,6 +4,13 @@ This is a backend system for a hospital management application built as part of 
 
 ---
 
+## 🚀 Live Deployment
+
+- 🔗 **Base API URL**: [https://makerble-task-hospital-backend.onrender.com](https://makerble-task-hospital-backend.onrender.com)
+- 📘 **Swagger Docs**: [https://makerble-task-hospital-backend.onrender.com/swagger/index.html](https://makerble-task-hospital-backend.onrender.com/swagger/index.html)
+
+---
+
 ## 🚀 Features
 
 - 🔐 **JWT Authentication** for login
@@ -37,6 +44,8 @@ HOSPITAL-BACKEND/
 ├── .gitignore
 ├── go.mod / go.sum           # Dependencies
 ├── main.go                   # App entry point
+├── Dockerfile
+├── .dockerignore
 └── readme.md                 # Project documentation
 ```
 
@@ -105,20 +114,21 @@ Tested Components:
 
 ### Authentication
 
-| Method | Endpoint       | Description             |
-|--------|----------------|-------------------------|
-| POST   | `/api/login`   | Login (doctor/receptionist) |
+| Method | Endpoint        | Description                       |
+|--------|------------------|-----------------------------------|
+| POST   | `/api/signup`    | Register new user (doctor/receptionist) |
+| POST   | `/api/login`     | Login with credentials            |
 
 ### Patients (Protected)
 
-| Method | Endpoint                       | Role         | Description                      |
-|--------|--------------------------------|--------------|----------------------------------|
-| POST   | `/api/patients`               | Receptionist | Register a new patient           |
-| GET    | `/api/patients`               | Any          | Get all patients                 |
-| GET    | `/api/patients/:id`           | Any          | Get a patient by ID              |
-| PUT    | `/api/patients/:id`           | Receptionist | Update entire patient record     |
-| PUT    | `/api/patients/:id/medical`   | Doctor       | Update medical history only      |
-| DELETE | `/api/patients/:id`           | Receptionist | Delete a patient record          |
+| Method | Endpoint                     | Role         | Description                      |
+|--------|-------------------------------|--------------|----------------------------------|
+| POST   | `/api/patients`              | Receptionist | Register a new patient           |
+| GET    | `/api/patients`              | Any          | Get all patients                 |
+| GET    | `/api/patients/:id`          | Any          | Get a patient by ID              |
+| PUT    | `/api/patients/:id`          | Receptionist | Update entire patient record     |
+| PUT    | `/api/patients/:id/medical`  | Doctor       | Update medical history only      |
+| DELETE | `/api/patients/:id`          | Receptionist | Delete a patient record          |
 
 > 🔒 All protected routes require:
 > ```
@@ -144,19 +154,24 @@ PORT=8080
 ## 🧾 Internship Task Coverage
 
 ✅ Single login endpoint for doctor & receptionist  
+✅ Signup for both roles  
 ✅ JWT-based authentication  
 ✅ RBAC middleware (doctor vs. receptionist)  
 ✅ REST API with GORM & PostgreSQL  
 ✅ Auto-migration  
 ✅ Test cases for critical logic  
-✅ Thunder Client docs in `/docs`  
-✅ Clean README and `.env.example`
+✅ Thunder Client + Swagger documentation  
+✅ Clean README and `.env.example`  
+✅ Dockerized & hosted on Render
 
 ---
 
 ## 👤 Author
 
 **Vineet Salve**  
+B.Tech, Computer Engineering   
+GitHub: [vineet12344](https://github.com/vineet12344)
+
 ---
 
 ## 📎 License
