@@ -30,8 +30,9 @@ func init() {
 // @title Hospital Management Backend API
 // @version 1.0
 // @description Role-based backend for doctors and receptionists
-// @host makerble-task-hospital-backend-production.up.railway.app
+// @host makerble-task-hospital-backend.onrender.com
 // @BasePath /api
+// @schemes https
 // @securityDefinitions.apikey BearerAuth
 // @in header
 // @name Authorization

@@ -32,7 +32,7 @@ definitions:
     - password
     - role
     type: object
-host: localhost:8080
+host: makerble-task-hospital-backend.onrender.com
 info:
   contact: {}
   description: Role-based backend for doctors and receptionists
@@ -314,6 +314,8 @@ paths:
       summary: Register a new user (Doctor or Receptionist)
       tags:
       - Auth
+schemes:
+- https
 securityDefinitions:
   BearerAuth:
     in: header

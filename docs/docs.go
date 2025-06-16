@@ -508,9 +508,9 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:8080",
+	Host:             "makerble-task-hospital-backend.onrender.com",
 	BasePath:         "/api",
-	Schemes:          []string{},
+	Schemes:          []string{"https"},
 	Title:            "Hospital Management Backend API",
 	Description:      "Role-based backend for doctors and receptionists",
 	InfoInstanceName: "swagger",
