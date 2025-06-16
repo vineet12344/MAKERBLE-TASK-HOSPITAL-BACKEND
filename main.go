@@ -7,7 +7,7 @@ import (
 	"log"
 	"os"
 
-	_ "hospital-backend/docs" // Important: for generated Swagger files
+	_ "hospital-backend/docs" // Swagger generated docs
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
@@ -16,38 +16,43 @@ import (
 
 func init() {
 	initializers.LoadEnv()
-	fmt.Println("Connecting to DB:", os.Getenv("DB_HOST"), os.Getenv("DB_NAME"))
+
+	fmt.Println("✅ Env Variables loaded successfully")
+	fmt.Printf("🔌 Connecting to DB → host: %s | dbname: %s\n", os.Getenv("DB_HOST"), os.Getenv("DB_NAME"))
+
 	initializers.ConnectDB()
 	initializers.SyncDB()
-	gin.SetMode(gin.ReleaseMode)
+
+	gin.SetMode(gin.ReleaseMode) // Use release mode in production
 }
 
 // @title Hospital Management Backend API
 // @version 1.0
 // @description Role-based backend for doctors and receptionists
-// @host localhost:8080
+// @host makerble-task-hospital-backend-production.up.railway.app
 // @BasePath /api
 // @securityDefinitions.apikey BearerAuth
 // @in header
 // @name Authorization
 func main() {
-	fmt.Println("!!! Welcome to Hospital Backend !!!")
+	fmt.Println("🚀 Starting Hospital Backend Server...")
 
 	r := gin.Default()
-	routes.RegisterRoutes(r)
 
+	// Swagger route
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
+	// Register app routes
+	routes.RegisterRoutes(r)
+
+	// Use Railway's PORT env var or fallback to 8080 locally
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
 
-	err := r.Run(":" + port)
-	if err != nil {
-		log.Fatal("Error Runnign the Server", err)
+	fmt.Println("🌐 Listening on port:", port)
+	if err := r.Run(":" + port); err != nil {
+		log.Fatalf("❌ Server failed to start: %v", err)
 	}
-
-	fmt.Println("Server running on port ", port)
-
 }
