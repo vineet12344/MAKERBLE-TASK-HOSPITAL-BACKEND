@@ -9,6 +9,7 @@ import (
 
 	_ "hospital-backend/docs" // Swagger generated docs
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -38,6 +39,9 @@ func main() {
 	fmt.Println("🚀 Starting Hospital Backend Server...")
 
 	r := gin.Default()
+
+	// Adding CORS
+	r.Use(cors.Default())
 
 	// Swagger route
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
