@@ -1,11 +1,16 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"hospital-backend/initializers"
 	"hospital-backend/routes"
 	"log"
+	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	_ "hospital-backend/docs" // Swagger generated docs
 
@@ -56,8 +61,41 @@ func main() {
 		port = "8080"
 	}
 
-	fmt.Println("🌐 Listening on port:", port)
-	if err := r.Run(":" + port); err != nil {
-		log.Fatalf("❌ Server failed to start: %v", err)
+	// fmt.Println("🌐 Listening on port:", port)
+	// if err := r.Run(":" + port); err != nil {
+	// 	log.Fatalf("❌ Server failed to start: %v", err)
+	// }
+
+	srv := &http.Server{
+		Addr:    ":" + port,
+		Handler: r,
 	}
+
+	go func() {
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatal("❌ Server failed: %v", err)
+		}
+	}()
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
+	<-quit // Block until signal is received
+	log.Println("🛑 Shutting down server...")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatal("❌ Server forced to shutdown: %v", err)
+	}
+
+	if initializers.DB != nil {
+		sqlDB, err := initializers.DB.DB()
+		if err != nil {
+			sqlDB.Close()
+			log.Println("🗃️ Database connection closed")
+		}
+	}
+
+	log.Println("✅ Server exited gracefully")
 }
